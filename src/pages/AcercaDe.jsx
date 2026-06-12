@@ -1,36 +1,56 @@
 function AcercaDe() {
   return (
-    <main className="contenido">
-      <section className="acerca-contenido">
-        <h2>Acerca de Emprende GO</h2>
+    <section className="pagina">
+      <h1>Acerca de EmprendeGO</h1>
 
-        <p>
-          Emprende GO es una plataforma creada para visibilizar emprendimientos
-          locales y facilitar que los usuarios los encuentren mediante un mapa
-          interactivo.
-        </p>
-      </section>
+      <p>
+        EmprendeGO es una plataforma diseñada para apoyar a emprendedores
+        bolivianos, brindándoles una herramienta moderna para promocionar sus
+        negocios y conectar con potenciales clientes.
+      </p>
 
-      <section className="acerca-cards">
-        <div className="card-mision">
+      <br />
+
+      <div className="grid-cards">
+        <div className="card">
           <h3>Nuestra misión</h3>
           <p>
-            Conectar emprendedores con clientes de forma sencilla, formal y
-            organizada.
+            Impulsar el crecimiento de los emprendimientos locales mediante la
+            tecnología, facilitando la visibilidad y el acceso a nuevas
+            oportunidades.
           </p>
         </div>
 
-        <div className="card-valores">
-          <h3>Valores</h3>
-
-          <ul>
-            <li>• Apoyo al comercio local</li>
-            <li>• Acceso fácil a información</li>
-            <li>• Innovación para emprendedores</li>
-          </ul>
+        <div className="card">
+          <h3>Nuestra visión</h3>
+          <p>
+            Convertirnos en la plataforma de referencia para la búsqueda,
+            promoción y desarrollo de emprendimientos en Bolivia.
+          </p>
         </div>
-      </section>
-    </main>
+
+        <div className="card">
+          <h3>¿Qué ofrecemos?</h3>
+          <p>
+            Directorio de emprendimientos, búsqueda avanzada, ubicación en
+            mapas, promoción digital y herramientas para el crecimiento de los
+            negocios.
+          </p>
+        </div>
+      </div>
+
+      <div style={{ marginTop: "40px" }}>
+        <h2 style={{ color: "#243b2f", marginBottom: "15px" }}>
+          Equipo de desarrollo
+        </h2>
+
+        <p>
+          Este proyecto fue desarrollado como parte de la plataforma
+          EmprendeGO, con el objetivo de fomentar el emprendimiento y la
+          innovación mediante soluciones digitales accesibles para todos.
+        </p>
+      </div>
+    </section>
   );
 }
 

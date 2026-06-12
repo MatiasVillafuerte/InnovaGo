@@ -1,0 +1,48 @@
+const emprendimientos = [
+  {
+    id: 1,
+    nombre: "Café Aroma Local",
+    categoria: "Gastronomía",
+    zona: "Centro",
+    descripcion: "Café artesanal con productos locales y ambiente cómodo.",
+    telefono: "70000001",
+    direccion: "Av. Principal, zona Centro",
+    lat: -16.5001,
+    lng: -68.1193,
+  },
+  {
+    id: 2,
+    nombre: "Manos Creativas",
+    categoria: "Artesanías",
+    zona: "Sopocachi",
+    descripcion: "Artesanías hechas a mano, recuerdos y decoración.",
+    telefono: "70000002",
+    direccion: "Calle Artesanos #123",
+    lat: -16.5082,
+    lng: -68.1264,
+  },
+  {
+    id: 3,
+    nombre: "Tecno Soluciones",
+    categoria: "Servicios",
+    zona: "Miraflores",
+    descripcion: "Soporte técnico, instalación de software y mantenimiento.",
+    telefono: "70000003",
+    direccion: "Av. Busch, Miraflores",
+    lat: -16.4968,
+    lng: -68.1098,
+  },
+  {
+    id: 4,
+    nombre: "Moda Andina",
+    categoria: "Ropa",
+    zona: "San Pedro",
+    descripcion: "Ropa moderna con detalles culturales bolivianos.",
+    telefono: "70000004",
+    direccion: "Calle Comercio #45",
+    lat: -16.5037,
+    lng: -68.1354,
+  },
+];
+
+export default emprendimientos;
