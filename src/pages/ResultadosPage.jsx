@@ -26,7 +26,7 @@ export default function ResultadosPage() {
         <span className="etiqueta">Resultados</span>
         <h1>Buscar emprendimientos</h1>
         <p>
-          Resultados para: <strong>{texto || "todos"}</strong>
+          Resultados para: <strong>{texto || categoria || "todos"}</strong>
         </p>
       </div>
 
@@ -39,7 +39,7 @@ export default function ResultadosPage() {
             <p>Intenta buscar otra palabra o cambiar la categoría.</p>
           </div>
         ) : (
-          <div className="grid">
+          <div className="grid-simple">
             {resultados.map((item) => (
               <CardEmprendimiento key={item.id} emprendimiento={item} />
             ))}

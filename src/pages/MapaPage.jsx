@@ -1,108 +1,96 @@
-import { useState } from "react";
+import "leaflet/dist/leaflet.css";
 import { Link } from "react-router-dom";
-import { categorias, emprendimientos } from "../data/emprendimientos";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import L from "leaflet";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import { emprendimientos } from "../data/emprendimientos";
+import LogoEmprendimiento from "../components/LogoEmprendimiento";
+
+const iconoMapa = L.divIcon({
+  className: "marcador-osm",
+  html: "📍",
+  iconSize: [34, 34],
+  iconAnchor: [17, 34],
+});
 
 export default function MapaPage() {
-  const [categoria, setCategoria] = useState("Todos");
-  const [seleccionado, setSeleccionado] = useState(emprendimientos[0]);
-
-  const filtrados =
-    categoria === "Todos"
-      ? emprendimientos
-      : emprendimientos.filter((item) => item.categoria === categoria);
-
-  function cambiarCategoria(valor) {
-    setCategoria(valor);
-
-    const nuevoFiltro =
-      valor === "Todos"
-        ? emprendimientos
-        : emprendimientos.filter((item) => item.categoria === valor);
-
-    setSeleccionado(nuevoFiltro[0] || null);
-  }
+  const centroCochabamba = [-17.3895, -66.1568];
 
   return (
     <section>
       <div className="titulo-pagina">
-        <span className="etiqueta">Mapa</span>
+        <span className="etiqueta">OpenStreetMap</span>
         <h1>Mapa de emprendimientos</h1>
         <p>
-          Visualiza negocios cercanos y abre el detalle de cada emprendimiento.
+          Visualiza los emprendimientos registrados en el mapa y abre el detalle
+          de cada negocio.
         </p>
       </div>
 
-      <div className="mapa-layout">
-        <div className="mapa">
-          <div className="camino camino1"></div>
-          <div className="camino camino2"></div>
-          <div className="camino camino3"></div>
+      <div className="mapa-osm-layout">
+        <div className="mapa-osm">
+          <MapContainer
+            center={centroCochabamba}
+            zoom={13}
+            scrollWheelZoom={true}
+            className="mapa-real"
+          >
+            <TileLayer
+              attribution="&copy; OpenStreetMap contributors"
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
 
-          {filtrados.map((item) => (
-            <button
-              key={item.id}
-              className={
-                seleccionado && seleccionado.id === item.id
-                  ? "pin activo"
-                  : "pin"
-              }
-              style={{
-                left: `${item.x}%`,
-                top: `${item.y}%`,
-              }}
-              onClick={() => setSeleccionado(item)}
-              title={item.nombre}
-            >
-              ●
-            </button>
-          ))}
+            {emprendimientos.map((item) => (
+              <Marker
+                key={item.id}
+                position={[item.lat, item.lng]}
+                icon={iconoMapa}
+              >
+                <Popup>
+                  <div className="popup-mapa">
+                    <div className="popup-head">
+                      <LogoEmprendimiento
+                        categoria={item.categoria}
+                        size="sm"
+                      />
+
+                      <div>
+                        <strong>{item.nombre}</strong>
+                        <span>{item.categoria}</span>
+                      </div>
+                    </div>
+
+                    <p>{item.descripcion}</p>
+
+                    <Link to={`/emprendimiento/${item.id}`} className="popup-link">
+                      Ver detalle <FaExternalLinkAlt />
+                    </Link>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+          </MapContainer>
         </div>
 
-        <aside className="filtros-mapa">
-          <h3>Filtros</h3>
+        <aside className="lista-mapa">
+          <h3>Emprendimientos</h3>
 
-          <select
-            value={categoria}
-            onChange={(e) => cambiarCategoria(e.target.value)}
-          >
-            {categorias.map((cat) => (
-              <option key={cat}>{cat}</option>
-            ))}
-          </select>
-
-          <h4>Emprendimientos</h4>
-
-          {filtrados.map((item) => (
-            <button
+          {emprendimientos.map((item) => (
+            <Link
               key={item.id}
-              className={
-                seleccionado && seleccionado.id === item.id
-                  ? "item-mapa activo"
-                  : "item-mapa"
-              }
-              onClick={() => setSeleccionado(item)}
+              className="item-lista-mapa"
+              to={`/emprendimiento/${item.id}`}
             >
-              <strong>{item.nombre}</strong>
-              <span>{item.categoria}</span>
-            </button>
+              <LogoEmprendimiento categoria={item.categoria} size="sm" />
+
+              <div>
+                <strong>{item.nombre}</strong>
+                <p>{item.categoria}</p>
+              </div>
+            </Link>
           ))}
         </aside>
       </div>
-
-      {seleccionado && (
-        <div className="negocio-seleccionado">
-          <img src={seleccionado.imagen} alt={seleccionado.nombre} />
-
-          <div>
-            <span className="categoria">{seleccionado.categoria}</span>
-            <h2>{seleccionado.nombre}</h2>
-            <p>{seleccionado.descripcion}</p>
-            <p>{seleccionado.direccion}</p>
-          </div>
-
-          <Link to={`/emprendimiento/${seleccionado.id}`}>Ver detalle</Link>
-        </div>
-      )}
     </section>
   );
 }

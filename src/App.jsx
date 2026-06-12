@@ -15,11 +15,14 @@ export default function App() {
 
       <main className="contenedor">
         <Routes>
-          <Route path="/" element={<Navigate to="/buscar" />} />
+          <Route path="/" element={<Navigate to="/buscar" replace />} />
           <Route path="/buscar" element={<BuscarPage />} />
           <Route path="/resultados" element={<ResultadosPage />} />
           <Route path="/mapa" element={<MapaPage />} />
-          <Route path="/emprendimiento/:id" element={<DetalleEmprendimientoPage />} />
+          <Route
+            path="/emprendimiento/:id"
+            element={<DetalleEmprendimientoPage />}
+          />
           <Route path="/perfil" element={<PerfilPage />} />
           <Route path="/favoritos" element={<FavoritosPage />} />
           <Route path="/resenas" element={<ResenasPage />} />

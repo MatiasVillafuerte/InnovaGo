@@ -1,11 +1,18 @@
 import { NavLink } from "react-router-dom";
+import { FaStore } from "react-icons/fa";
 
 export default function Header() {
   return (
     <header className="header">
-      <div className="logo">
-        <span className="logo-icono">E</span>
-        <span>EmprendeGO</span>
+      <div className="logo-app">
+        <div className="logo-app-icono">
+          <FaStore />
+        </div>
+
+        <div>
+          <strong>EmprendeGO</strong>
+          <span>Negocios locales cerca de ti</span>
+        </div>
       </div>
 
       <nav className="menu">
