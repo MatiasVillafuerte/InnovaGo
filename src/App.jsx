@@ -40,13 +40,26 @@ function Navbar() {
 
       {user ? (
         <div className="user-box">
-          <Link className="btn-mini" to={user.rol === "admin" ? "/admin" : user.rol === "emprendedor" ? "/emprendedor" : "/usuario"}>
+          <Link
+            className="btn-mini"
+            to={
+              user.rol === "admin"
+                ? "/admin"
+                : user.rol === "emprendedor"
+                ? "/emprendedor"
+                : "/usuario"
+            }
+          >
             {user.nombre}
           </Link>
-          <button onClick={salir} className="btn-outline">Salir</button>
+          <button onClick={salir} className="btn-outline">
+            Salir
+          </button>
         </div>
       ) : (
-        <Link to="/login" className="btn-primary">Ingresar</Link>
+        <Link to="/login" className="btn-primary">
+          Ingresar
+        </Link>
       )}
     </header>
   );
@@ -67,8 +80,12 @@ export default function App() {
         <Route path="/usuario" element={<PanelUsuario />} />
         <Route path="/emprendedor" element={<PanelEmprendedor />} />
         <Route path="/admin" element={<PanelAdmin />} />
-        <Route path="/emprendimiento/:id" element={<DetalleEmprendimiento />} />
+        <Route
+          path="/emprendimiento/:id"
+          element={<DetalleEmprendimiento />}
+        />
       </Routes>
+
       <footer className="footer">
         <b>Emprende GO</b>
         <span>Plataforma de emprendimientos locales en Bolivia.</span>
