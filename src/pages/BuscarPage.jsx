@@ -13,7 +13,8 @@ export default function BuscarPage() {
       item.descripcion.toLowerCase().includes(texto.toLowerCase()) ||
       item.categoria.toLowerCase().includes(texto.toLowerCase());
 
-    const coincideCategoria = categoria === "Todos" || item.categoria === categoria;
+    const coincideCategoria =
+      categoria === "Todos" || item.categoria === categoria;
 
     return coincideTexto && coincideCategoria;
   });
@@ -25,14 +26,15 @@ export default function BuscarPage() {
           <span className="etiqueta">EmprendeGO</span>
           <h1>Catálogo de emprendimientos</h1>
           <p>
-            Encuentra negocios locales, revisa sus productos y contacta por WhatsApp.
+            Encuentra negocios locales, revisa sus productos, mira su ubicación
+            y contacta directamente por WhatsApp.
           </p>
         </div>
 
         <div className="home-buscador">
           <input
             type="text"
-            placeholder="Buscar emprendimiento..."
+            placeholder="Buscar emprendimiento, categoría o producto..."
             value={texto}
             onChange={(e) => setTexto(e.target.value)}
           />
@@ -49,6 +51,10 @@ export default function BuscarPage() {
             {cat}
           </button>
         ))}
+      </div>
+
+      <div className="resultado-contador">
+        <strong>{filtrados.length}</strong> emprendimiento(s) encontrados
       </div>
 
       <div className="empr-grid-catalogo">
