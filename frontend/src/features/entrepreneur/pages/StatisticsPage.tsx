@@ -1,0 +1,166 @@
+import {
+  BarChart,
+  Bar,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from 'recharts'
+import { Eye, Heart, TrendingUp, Target } from 'lucide-react'
+import { Card, CardHeader, CardTitle, CardContent } from '../../../components/ui/Card'
+import { StatCard } from '../../../components/ui/StatCard'
+import {
+  dailyVisits,
+  topViewedProducts,
+  topSavedProducts,
+  monthlyGrowth,
+  dashboardStats,
+} from '../data/mockData'
+
+const COLORS = ['#0ea5e9', '#22c55e', '#f59e0b', '#06b6d4']
+
+export function StatisticsPage() {
+  const conversionRate = ((892 / 12458) * 100).toFixed(1)
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold text-slate-900">Estadísticas</h1>
+        <p className="text-slate-500">Análisis detallado del rendimiento de tu emprendimiento</p>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard title="Visitas hoy" value={710} icon={Eye} trend="+5.2% vs ayer" trendUp />
+        <StatCard title="Conversión visitas" value={`${conversionRate}%`} icon={Target} trend="Visitas → Favoritos" trendUp />
+        <StatCard title="Crecimiento mensual" value="+35%" icon={TrendingUp} trend="Junio 2026" trendUp />
+        <StatCard title="Total favoritos" value={dashboardStats.totalFavorites} icon={Heart} trend="+8.3% vs mes anterior" trendUp />
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Visitas diarias</CardTitle>
+          </CardHeader>
+          <CardContent className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={dailyVisits}>
+                <CartesianGrid strokeDasharray="3 3" className="stroke-slate-200" />
+                <XAxis dataKey="date" tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                <YAxis tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                <Tooltip
+                  contentStyle={{
+                    borderRadius: '8px',
+                    border: '1px solid #e2e8f0',
+                    fontSize: '13px',
+                  }}
+                />
+                <Bar dataKey="visits" fill="#0ea5e9" radius={[4, 4, 0, 0]} name="Visitas" />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Crecimiento mensual (%)</CardTitle>
+          </CardHeader>
+          <CardContent className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={monthlyGrowth}>
+                <CartesianGrid strokeDasharray="3 3" className="stroke-slate-200" />
+                <XAxis dataKey="month" tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                <YAxis tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                <Tooltip
+                  contentStyle={{
+                    borderRadius: '8px',
+                    border: '1px solid #e2e8f0',
+                    fontSize: '13px',
+                  }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="growth"
+                  stroke="#0ea5e9"
+                  strokeWidth={2}
+                  dot={{ fill: '#0ea5e9', r: 4 }}
+                  name="Crecimiento"
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Productos más vistos</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {topViewedProducts.map((item, i) => (
+              <div key={item.name} className="flex items-center gap-3">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary-100 text-xs font-bold text-primary-700">
+                  {i + 1}
+                </span>
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-slate-900">{item.name}</p>
+                  <div className="mt-1 h-2 overflow-hidden rounded-full bg-slate-100">
+                    <div
+                      className="h-full rounded-full bg-primary-500"
+                      style={{ width: `${(item.views / topViewedProducts[0].views) * 100}%` }}
+                    />
+                  </div>
+                </div>
+                <span className="text-sm font-semibold text-slate-600">
+                  {item.views.toLocaleString()}
+                </span>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Productos más guardados</CardTitle>
+          </CardHeader>
+          <CardContent className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={topSavedProducts}
+                  dataKey="saves"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={80}
+                  label={({ name, percent }) => {
+                    const label = name ?? ''
+                    return `${label.split(' ').slice(0, 2).join(' ')} ${((percent ?? 0) * 100).toFixed(0)}%`
+                  }}
+                  labelLine={false}
+                >
+                  {topSavedProducts.map((_, i) => (
+                    <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  contentStyle={{
+                    borderRadius: '8px',
+                    border: '1px solid #e2e8f0',
+                    fontSize: '13px',
+                  }}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  )
+}

@@ -1,16 +1,49 @@
-# React + Vite
+# InnovaGO
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Plataforma unificada para emprendedores y usuarios en Bolivia.
 
-Currently, two official plugins are available:
+## Estructura
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```
+InnovaGO/
+├── backend/          # API Node.js + MySQL (autenticación)
+└── frontend/         # Aplicación React unificada
+```
 
-## React Compiler
+## Módulos integrados
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Módulo | Origen | Rutas |
+|--------|--------|-------|
+| Autenticación | `login` | `/login`, `/register`, `/verify-email` |
+| Público | `InnovaGo-ayelen` + `Yubidsa` | `/`, `/buscar`, `/mapa`, `/emprendimiento/:id`, etc. |
+| Panel Admin | `panel-admin` | `/admin/*` |
+| Panel Emprendedor | `vista-emprendedor` | `/emprendedor/*` |
 
-## Expanding the ESLint configuration
+## Inicio rápido
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Backend (opcional — requiere MySQL)
+
+```bash
+cd backend
+cp .env.example .env
+npm install
+npm start
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+La app estará en http://localhost:3000
+
+## Diseño
+
+El sistema visual está basado en la carpeta `login` (Tailwind, paleta azul primary, componentes `.btn-primary`, `.card`, `.input-field`).
+
+## Carpetas originales
+
+Las carpetas originales del proyecto (`login`, `InnovaGo-ayelen`, etc.) se conservan como referencia. El proyecto activo es `InnovaGO/`.

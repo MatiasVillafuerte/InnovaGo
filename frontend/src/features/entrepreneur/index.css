@@ -1,0 +1,45 @@
+/* =====================================================
+   Panel Emprendedor — estilos específicos
+   Usa el mismo @theme que index.css (azul sky / primary)
+   NO redefine colores para mantener consistencia global.
+   ===================================================== */
+
+@layer base {
+  * {
+    @apply border-slate-200;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+    font-family: var(--font-sans);
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(148 163 184) transparent;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Tabla de datos */
+  .data-table th {
+    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500 bg-slate-50;
+  }
+
+  .data-table td {
+    @apply px-4 py-3 text-sm text-slate-700 border-b border-slate-100;
+  }
+}
+
